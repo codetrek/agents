@@ -1,31 +1,31 @@
 #!/usr/bin/env bash
 
-set -e
+BASEDIR=$(cd "$(dirname ${BASH_SOURCE})" && pwd)
 
-catalog=$(cd "$(dirname "${BASH_SOURCE[0]}")/skills" && pwd -P)
-shared="$HOME/.agents/skills"
+# symlnk <src> <dest>
+function symlnk() {
+    local src=$1
+    local target=$2
 
-install_link() {
-    local destination=$1 source=$2
-    [[ -L "$destination" ]] && return 0
-    if [[ -d "$destination" ]]; then
-        printf 'Directory already exists: %s\n' "$destination" >&2
-        return 1
-    fi
-    ln -sf "$source" "$destination"
+    test -d $target && ! test -L $target && echo "ERROR: $target is a directory, please remove and try again!" && exit 1
+
+    ! test -L $target && ln -sf $src $target
 }
 
-if [[ ! -e "$HOME/.agents" && ! -L "$HOME/.agents" && -d "$HOME/.env/.agents" ]]; then
-    install_link "$HOME/.agents" .env/.agents
-fi
-mkdir -p "$HOME/.agents"
-if ! [[ "$shared" -ef "$catalog" ]]; then
-    install_link "$shared" "$catalog"
-fi
+######################
+# .agents
+symlnk $BASEDIR ~/.agents
 
-for client in .claude .copilot; do
-    mkdir -p "$HOME/$client"
-    install_link "$HOME/$client/skills" ../.agents/skills
-done
+######################
+# .claude
+mkdir -p ~/.claude
+symlnk ../.agents/skills ~/.claude/skills
 
+######################
+# .copilot
+mkdir -p ~/.copilot
+symlnk ../.agents/skills ~/.copilot/skills
+
+######################
+# Finally
 echo Done!
