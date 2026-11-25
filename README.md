@@ -10,7 +10,7 @@ cd agents
 ./setup.sh
 ```
 
-On Windows, run `setup.cmd` from the checkout. It uses Windows PowerShell 5.1 and directory junctions on a local filesystem that supports them. On macOS and Linux, `setup.sh` uses Bash and symbolic links.
+Run `setup.sh` on macOS or Linux, or `setup.cmd` on Windows. The Windows script follows the dotfiles setup and uses Windows PowerShell and directory symbolic links. Enable Windows Developer Mode or run it from an Administrator terminal.
 
 Setup links `~/.agents/skills` to the checkout's `skills/` directory. Codex reads this shared catalog directly. Claude and Copilot each get a single directory link to `~/.agents/skills`. The installers do not manage `~/.codex/skills`, including its built-in `.system` directory. On machines using the dotfiles checkout at `~/.env`, the existing `~/.agents` link and non-skill settings remain available. No dotfiles checkout is required for a standalone installation.
 
