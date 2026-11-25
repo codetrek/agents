@@ -10,11 +10,11 @@ cd agents
 ./setup.sh
 ```
 
-Run `setup.sh` on macOS or Linux, or `setup.cmd` on Windows. The Windows script follows the dotfiles setup and uses Windows PowerShell and directory symbolic links. Enable Windows Developer Mode or run it from an Administrator terminal.
+Run `setup.sh` on macOS or Linux, or `setup.cmd` on Windows. Windows setup uses Windows PowerShell and directory symbolic links. Enable Windows Developer Mode or run it from an Administrator terminal.
 
 Setup links `~/.agents/skills` to the checkout's `skills/` directory. Codex reads this shared catalog directly. Claude and Copilot each get a single directory link to `~/.agents/skills`. The installers do not manage `~/.codex/skills`, including its built-in `.system` directory. On machines using the dotfiles checkout at `~/.env`, the existing `~/.agents` link and non-skill settings remain available. No dotfiles checkout is required for a standalone installation.
 
-If an installation path contains other skills, files, or a link to a different catalog, inspect and preserve them before moving the conflicting path aside. For an older dotfiles checkout with real skill directories under `~/.env/.agents/skills`, compare them with this catalog and preserve any local changes before switching that directory to a link.
+As with the dotfiles installer, Bash setup keeps existing symbolic links and refuses to replace real directories. Windows setup keeps matching links, replaces links to a different target, and refuses to replace ordinary files or directories. For an older dotfiles checkout with real skill directories under `~/.env/.agents/skills`, compare them with this catalog and preserve any local changes before switching that directory to a link.
 
 ## Update
 
