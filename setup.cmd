@@ -23,16 +23,19 @@ function Ensure-Directory($Path) {
     New-Item -ItemType Directory -Path $Path -Force | Out-Null
 }
 
-function Test-LinkTarget($Item, $Source) {
-    if ($Item.LinkType -notin @('SymbolicLink', 'Junction')) { return $false }
-    $linkTarget = @($Item.Target)[0]
-    if ([string]::IsNullOrEmpty($linkTarget)) { return $false }
-    $parent = [System.IO.Path]::GetDirectoryName($Item.FullName)
-    $target = [System.IO.Path]::GetFullPath([System.IO.Path]::Combine($parent, $linkTarget))
-    return $target.TrimEnd('\') -ieq $Source
-}
-
-function New-ItemLink($Source, $Destination) {
+function Link-Item($Source, $Destination) {
+    if (-not (Test-Path -LiteralPath $Source)) {
+        throw "Link source does not exist: $Source"
+    }
+    $existing = Get-Item -LiteralPath $Destination -Force -ErrorAction SilentlyContinue
+    if ($null -ne $existing) {
+        if ($existing.LinkType -notin @('SymbolicLink', 'Junction')) {
+            throw "$Destination already exists. Move it aside and run setup again."
+        }
+        if (@($existing.Target) -contains $Source) { return }
+        # Delete only the link itself, including directory links and broken links.
+        $existing.Delete()
+    }
     $flags = 2 # SYMBOLIC_LINK_FLAG_ALLOW_UNPRIVILEGED_CREATE
     if ((Get-Item -LiteralPath $Source).PSIsContainer) { $flags = $flags -bor 1 }
     if (-not [EnvSetupLinks]::CreateSymbolicLink($Destination, $Source, $flags)) {
@@ -43,22 +46,6 @@ function New-ItemLink($Source, $Destination) {
         throw (New-Object System.ComponentModel.Win32Exception($errorCode))
     }
     Write-Host "Linked $Destination"
-}
-
-function Link-Item($Source, $Destination) {
-    if (-not (Test-Path -LiteralPath $Source)) {
-        throw "Link source does not exist: $Source"
-    }
-    $existing = Get-Item -LiteralPath $Destination -Force -ErrorAction SilentlyContinue
-    if ($null -ne $existing) {
-        if ($existing.LinkType -notin @('SymbolicLink', 'Junction')) {
-            throw "$Destination already exists. Move it aside and run setup again."
-        }
-        if (Test-LinkTarget $existing $Source) { return }
-        # Delete only the link itself, including directory links and broken links.
-        $existing.Delete()
-    }
-    New-ItemLink $Source $Destination
 }
 
 try {
