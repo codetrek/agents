@@ -20,6 +20,7 @@ symlnk $BASEDIR ~/.agents
 # .codex
 mkdir -p ~/.codex
 symlnk ../.agents/AGENTS.md ~/.codex/AGENTS.md
+symlnk ../.agents/agents ~/.codex/agents
 
 ######################
 # .claude
@@ -31,6 +32,7 @@ symlnk ../.agents/skills ~/.claude/skills
 # .copilot
 mkdir -p ~/.copilot
 symlnk ../.agents/skills ~/.copilot/skills
+symlnk ../.agents/agents ~/.copilot/agents
 
 ######################
 # Finally

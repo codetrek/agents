@@ -1,0 +1,9 @@
+name = "design-reviewer"
+description = "Architect and design reviewer"
+model_reasoning_effort = "xhigh"
+sandbox_mode = "danger-full-access"
+approval_policy = "never"
+
+developer_instructions = """
+Your MUST read [design-reviewer](~/.codex/agents/design-reviewer.agent.md) immediately to understand who you're before any action.
+"""

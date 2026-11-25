@@ -58,6 +58,7 @@ try {
     $codex = Join-Path $profileRoot '.codex'
     Ensure-Directory $codex
     Link-Item (Join-Path $agents 'AGENTS.md') (Join-Path $codex 'AGENTS.md')
+    Link-Item (Join-Path $agents 'agents') (Join-Path $codex 'agents')
 
     $claude = Join-Path $profileRoot '.claude'
     Ensure-Directory $claude
@@ -67,6 +68,7 @@ try {
     $copilot = Join-Path $profileRoot '.copilot'
     Ensure-Directory $copilot
     Link-Item (Join-Path $agents 'skills') (Join-Path $copilot 'skills')
+    Link-Item (Join-Path $agents 'agents') (Join-Path $copilot 'agents')
     Write-Host 'Done!'
 } catch {
     [Console]::Error.WriteLine("ERROR: " + $_.Exception.Message)
