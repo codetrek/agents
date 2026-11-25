@@ -55,8 +55,13 @@ try {
     $agents = Join-Path $profileRoot '.agents'
     Link-Item $repo $agents
 
+    $codex = Join-Path $profileRoot '.codex'
+    Ensure-Directory $codex
+    Link-Item (Join-Path $agents 'AGENTS.md') (Join-Path $codex 'AGENTS.md')
+
     $claude = Join-Path $profileRoot '.claude'
     Ensure-Directory $claude
+    Link-Item (Join-Path $agents 'AGENTS.md') (Join-Path $claude 'CLAUDE.md')
     Link-Item (Join-Path $agents 'skills') (Join-Path $claude 'skills')
 
     $copilot = Join-Path $profileRoot '.copilot'

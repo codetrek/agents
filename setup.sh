@@ -17,8 +17,14 @@ function symlnk() {
 symlnk $BASEDIR ~/.agents
 
 ######################
+# .codex
+mkdir -p ~/.codex
+symlnk ../.agents/AGENTS.md ~/.codex/AGENTS.md
+
+######################
 # .claude
 mkdir -p ~/.claude
+symlnk ../.agents/AGENTS.md ~/.claude/CLAUDE.md
 symlnk ../.agents/skills ~/.claude/skills
 
 ######################
