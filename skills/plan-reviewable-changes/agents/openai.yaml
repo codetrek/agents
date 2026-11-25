@@ -1,0 +1,4 @@
+interface:
+  display_name: "拆解为可独立审查的任务"
+  short_description: "在编码前划分完整、聚焦、可验证的改动，平衡审查规模与交付成本"
+  default_prompt: "使用 $plan-reviewable-changes 在实施前划分这项工作的交付单元，明确目标、预计代码与审查范围、验证方式和依赖顺序，兼顾审查负担与 CI/Review 开销。"

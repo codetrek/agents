@@ -1,0 +1,7 @@
+interface:
+  display_name: "Herdr 团队模式"
+  short_description: "手工启用 leader 与 Codex 队员协作，显式指定模型并每十五分钟巡检任务进展"
+  default_prompt: "手工启用 $herdr-team，先读取 herdr --skill 并核对环境，由最左侧 Agent 担任 leader，在右侧按需创建最多四名显式指定模型的 Codex teammates，派发完整任务并每十五分钟巡检。"
+
+policy:
+  allow_implicit_invocation: false

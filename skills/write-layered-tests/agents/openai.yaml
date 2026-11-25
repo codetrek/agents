@@ -1,0 +1,4 @@
+interface:
+  display_name: "编写分层测试"
+  short_description: "按行为确定测试范围，保留轻量真实逻辑，选择性替代依赖并验证完整链路"
+  default_prompt: "使用 $write-layered-tests 为这个功能编写或审查测试，保留轻量确定的真实协作者，按成本与场景控制选择替代，验证真实依赖、API 集成和完整 E2E，并复用昂贵环境、缩短可控等待。"

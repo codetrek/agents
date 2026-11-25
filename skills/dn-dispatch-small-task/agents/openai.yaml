@@ -1,0 +1,4 @@
+interface:
+  display_name: "派发 Daynight 小任务"
+  short_description: "准备完整的小改动任务，核对责任与版本后交给 Worker 并返回"
+  default_prompt: "使用 $dn-dispatch-small-task 准备并派发这个小改动，核对目标与方案、验收、项目、平台和责任，用准确版本启用权限并读回确认。"

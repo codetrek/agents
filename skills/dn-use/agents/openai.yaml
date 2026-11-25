@@ -1,0 +1,12 @@
+interface:
+  display_name: "使用 Daynight"
+  short_description: "按工作目标和正式成果维护 Daynight 任务，明确材料与会话过程的边界"
+  default_prompt: "使用 $dn-use，按当前项目约定持续跟踪本次工作的目标、正式材料、成果与验收状态。"
+
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "daynight"
+      description: "Daynight 任务与进展跟踪"
+      transport: "streamable_http"
+      url: "https://daynight.cc/mcp"

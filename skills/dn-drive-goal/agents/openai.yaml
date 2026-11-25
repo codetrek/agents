@@ -1,0 +1,4 @@
+interface:
+  display_name: "持续推进 Daynight Goal"
+  short_description: "按仓库规范持续监控并协调 Worker 任务，主动维护 Goal 状态与进展并完成验收"
+  default_prompt: "使用 $dn-drive-goal 按目标仓库规范持续推进这个 Daynight Goal，由 Worker 执行，主动维护 Goal 状态并监控正在执行的任务，按已确认范围推进交付与整体验收，直到目标实际完成。"

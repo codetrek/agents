@@ -1,0 +1,4 @@
+interface:
+  display_name: "设计方案评审"
+  short_description: "依据确认范围与当前设计证据独立评审，输出分级问题和真实覆盖的结论"
+  default_prompt: "使用 $my-design-review 评审这份方案，核对已确认要求、当前版本及相关原始定义，按实际风险选择独立视角，给出有依据的 finding、证据缺口和范围明确的结论。"

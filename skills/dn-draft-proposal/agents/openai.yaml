@@ -1,0 +1,4 @@
+interface:
+  display_name: "起草 Daynight 提案"
+  short_description: "将粗略想法整理为待确认的 Daynight 提案，保存上下文与开放问题"
+  default_prompt: "使用 $dn-draft-proposal 把这些粗略想法整理并保存成 Daynight proposed 任务，保留假设和待确认问题，不推进实施或自动派发。"

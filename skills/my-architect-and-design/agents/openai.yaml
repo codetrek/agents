@@ -1,0 +1,4 @@
+interface:
+  display_name: "架构与方案设计"
+  short_description: "探索现状，形成可实施方案与交付单元，独立评审并按授权交付设计材料"
+  default_prompt: "使用 $my-architect-and-design 设计这个功能或系统，形成可实施的方案与交付拆分，并完成独立评审。"

@@ -1,0 +1,4 @@
+interface:
+  display_name: "创建为Daynight独立交付任务"
+  short_description: "将已确认并评审的交付拆分登记为实际任务，核对来源、依赖和保存结果"
+  default_prompt: "使用 $dn-create-delivery-tasks 按目标仓库流程登记已确认并完成评审的交付拆分，补全实施、必要阶段交付与验收任务各自的定义，核对 Parent、来源和依赖并读回结果。"

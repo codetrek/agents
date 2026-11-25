@@ -1,0 +1,7 @@
+interface:
+  display_name: "评价现有架构"
+  short_description: "从职责、依赖、代码组织、演进、可测试性、安全性和运行风险等维度评价现有仓库或模块"
+  default_prompt: "使用 $evaluate-architecture 评价这个仓库或模块的现有架构，依据代表性场景给出分维度判断和改进优先级。"
+
+policy:
+  allow_implicit_invocation: false

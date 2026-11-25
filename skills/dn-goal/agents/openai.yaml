@@ -1,0 +1,4 @@
+interface:
+  display_name: "组织和维护 Daynight Goal"
+  short_description: "按仓库流程组织 Goal 与子任务，维护共享材料、阶段状态和整体验收依据"
+  default_prompt: "使用 $dn-goal 按目标仓库流程创建或复用并组织这个 Daynight Goal，明确目标、子任务归属、阶段、共享材料、状态和整体验收，完成当前已授权的维护后返回。"

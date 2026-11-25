@@ -1,0 +1,4 @@
+interface:
+  display_name: "移交给Agent自动执行"
+  short_description: "核对已登记任务的内容、责任与状态，交给 Worker 并读回移交结果"
+  default_prompt: "使用 $dn-handoff 移交这个 Task、任务清单或 Goal 的未完成直接子任务，核对内容、认证责任与状态，用准确版本启用许可并读回结果。"

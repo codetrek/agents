@@ -1,0 +1,4 @@
+interface:
+  display_name: "调查缺陷并派发Daynight修复任务"
+  short_description: "核实缺陷并查明根因，确定修复与验证方案，准备完整 Daynight 任务交给 Worker"
+  default_prompt: "使用 $dn-dig-bug-and-fix 调查这个 bug，核实根因、确定修复与回归验证方案，按目标仓库流程创建或复用完整的 Daynight 任务并移交 Worker，核对派发结果后返回。"
