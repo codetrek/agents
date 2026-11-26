@@ -12,10 +12,10 @@ cd agents
 
 Run `setup.sh` on macOS or Linux, or `setup.cmd` on Windows. Windows setup uses Windows PowerShell and directory symbolic links. Enable Windows Developer Mode or run it from an Administrator terminal.
 
-Setup links `~/.agents/skills` to the checkout's `skills/` directory. Codex reads this shared catalog directly. Claude and Copilot each get a single directory link to `~/.agents/skills`. The installers do not manage `~/.codex/skills`, including its built-in `.system` directory. On machines using the dotfiles checkout at `~/.env`, the existing `~/.agents` link and non-skill settings remain available. No dotfiles checkout is required for a standalone installation.
+Setup links `~/.agents` to this checkout. If the checkout is already at `~/.agents`, setup uses it directly. Codex reads `~/.agents/skills` directly; Claude and Copilot each get a directory link to it. Setup also links the shared `AGENTS.md` for Codex and Claude, and the shared `agents/` directory for Codex and Copilot. It leaves `~/.codex/skills`, including `.system`, alone.
 
-As with the dotfiles installer, Bash setup keeps existing symbolic links and refuses to replace real directories. Windows setup keeps matching links, replaces links to a different target, and refuses to replace ordinary files or directories. For an older dotfiles checkout with real skill directories under `~/.env/.agents/skills`, compare them with this catalog and preserve any local changes before switching that directory to a link.
+Setup keeps links that already point to the intended location and repairs links that point elsewhere, including broken links. If a link path is occupied by a regular file or directory, setup stops and reports the path.
 
 ## Update
 
-Run `git pull --ff-only` in this checkout. New and removed skills are reflected through the directory links; start a new agent session if an existing one still shows the previous catalog. Rerun setup to restore missing links. To uninstall the catalog, remove only the installed directory links, preserving their targets and the `.agents` parent.
+Run `git pull --ff-only` in this checkout. New and removed skills are reflected through the directory links; start a new agent session if an existing one still shows the previous catalog. Rerun setup to restore missing or incorrect links. To uninstall, remove the links created by setup and keep the checkout intact.

@@ -28,11 +28,25 @@ function Link-Item($Source, $Destination) {
         throw "Link source does not exist: $Source"
     }
     $existing = Get-Item -LiteralPath $Destination -Force -ErrorAction SilentlyContinue
+    if ($null -eq $existing) {
+        $parent = Split-Path -Parent $Destination
+        $name = Split-Path -Leaf $Destination
+        $existing = Get-ChildItem -LiteralPath $parent -Force -Filter $name |
+            Where-Object { $_.Name -ieq $name }
+    }
     if ($null -ne $existing) {
         if ($existing.LinkType -notin @('SymbolicLink', 'Junction')) {
             throw "$Destination already exists. Move it aside and run setup again."
         }
-        if (@($existing.Target) -contains $Source) { return }
+        $target = @($existing.Target)[0]
+        if ($target) {
+            if ($target.StartsWith('\??\') -or $target.StartsWith('\\?\')) {
+                $target = $target.Substring(4)
+                if ($target -like 'UNC\*') { $target = '\\' + $target.Substring(4) }
+            }
+            $target = [System.IO.Path]::GetFullPath([System.IO.Path]::Combine((Split-Path -Parent $Destination), $target))
+            if ($target.TrimEnd('\') -ieq $Source.TrimEnd('\')) { return }
+        }
         # Delete only the link itself, including directory links and broken links.
         $existing.Delete()
     }
@@ -53,7 +67,9 @@ try {
     $repo = Split-Path -Parent $env:ENV_SETUP_FILE
 
     $agents = Join-Path $profileRoot '.agents'
-    Link-Item $repo $agents
+    if ($repo.TrimEnd('\') -ine $agents.TrimEnd('\')) {
+        Link-Item $repo $agents
+    }
 
     $codex = Join-Path $profileRoot '.codex'
     Ensure-Directory $codex

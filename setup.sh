@@ -1,20 +1,31 @@
 #!/usr/bin/env bash
+set -e
 
-BASEDIR=$(cd "$(dirname ${BASH_SOURCE})" && pwd)
+BASEDIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)
 
 # symlnk <src> <dest>
 function symlnk() {
     local src=$1
     local target=$2
 
-    test -d $target && ! test -L $target && echo "ERROR: $target is a directory, please remove and try again!" && exit 1
-
-    ! test -L $target && ln -sf $src $target
+    if [[ -L "$target" ]]; then
+        if [[ $(readlink "$target") == "$src" ]] ||
+            (cd "$(dirname "$target")" && [[ "$src" -ef "$(basename "$target")" ]]); then
+            return 0
+        fi
+        unlink "$target"
+    elif [[ -e "$target" ]]; then
+        echo "ERROR: $target already exists. Move it aside and run setup again!" >&2
+        return 1
+    fi
+    ln -s "$src" "$target"
 }
 
 ######################
 # .agents
-symlnk $BASEDIR ~/.agents
+if ! [[ "$BASEDIR" -ef ~/.agents ]]; then
+    symlnk "$BASEDIR" ~/.agents
+fi
 
 ######################
 # .codex
